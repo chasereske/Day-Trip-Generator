@@ -2,10 +2,14 @@
 
 function myDayTripGenerator (){
 
+        //Create initial arrays to call from
+
         let potentialDestinations = ["Lexington", "Chicago", "Detroit", "Cincinnati", "Louisville", "Milwaukee"];
         let potentialRestaurantType = ["Fine Dining", "Casual Dining", "Family Style", "Fast Food", "Cafe", "Buffet", "Food Truck"];
         let potentialTransportation = ["Car", "Bus", "Taxi", "Uber", "Rental Car", "Motorcycle"];
         let potentialEntertainment = ["Movie", "Concert", "Bars", "Zoo", "Comedy Club", "Theatre"];
+
+        //Create initial functions to randomly generate aspects of the trip 
 
         function randomDestination(){
              return potentialDestinations[Math.floor(Math.random() * potentialDestinations.length)];
@@ -24,13 +28,7 @@ function myDayTripGenerator (){
         }
 
         
-        let initialDestination = randomDestination();
-        let initialRestaurant = randomRestaurantType();
-        let initialTransport = randomTransportation();
-        let initialEntertainment = randomEntertainment();
-
-        console.log("Your randomly generated day trip consists of going by " + initialTransport + " to " + initialDestination + ", eating at a " + initialRestaurant + " restaurant, and your entertainment being " + initialEntertainment + "!");
-        
+        //Create functions that will provide a way of selecting individual aspects of the trip
 
         function chooseYourDestination(){
             let changeDestination = prompt("Do you want to change the destination?", "Must enter 'Yes' or 'No'");
@@ -38,8 +36,8 @@ function myDayTripGenerator (){
             
             if(changeDestination === "Yes"){
                 while (changeDestination === "Yes"){
-                    let nextDestination = randomDestination;
-                    let answeredNextDestination = prompt("What about going to " + nextDestination + "?", "must enter 'Yes' or 'No'");
+                    let nextDestination = randomDestination();
+                    let answeredNextDestination = prompt("What about going to " + nextDestination + "?", "Must enter 'Yes' or 'No'");
                     if(answeredNextDestination === "Yes") {
                         newDestination = nextDestination; 
                         changeDestination = "No";
@@ -59,8 +57,8 @@ function myDayTripGenerator (){
             
             if(changeRestaurant === "Yes"){
                 while (changeRestaurant === "Yes"){
-                    let nextRestaurant = randomRestaurantType;
-                    let answeredNextRestaurant = prompt("What about going to " + nextRestaurant + "?", "must enter 'Yes' or 'No'");
+                    let nextRestaurant = randomRestaurantType();
+                    let answeredNextRestaurant = prompt("What about going to " + nextRestaurant + "?", "Must enter 'Yes' or 'No'");
                     if(answeredNextRestaurant === "Yes") {
                         newRestaurant = nextRestaurant; 
                         changeRestaurant = "No";
@@ -80,8 +78,8 @@ function myDayTripGenerator (){
             
             if(changeTransportation === "Yes"){
                 while (changeTransportation === "Yes"){
-                    let nextTransportation = randomTransportation;
-                    let answeredNextTransportation = prompt("What about going to " + nextTransportation + "?", "must enter 'Yes' or 'No'");
+                    let nextTransportation = randomTransportation();
+                    let answeredNextTransportation = prompt("What about going to " + nextTransportation + "?", "Must enter 'Yes' or 'No'");
                     if(answeredNextTransportation === "Yes") {
                         newTransportation = nextTransportation; 
                         changeTransportation = "No";
@@ -101,8 +99,8 @@ function myDayTripGenerator (){
             
             if(changeEntertainment === "Yes"){
                 while (changeEntertainment === "Yes"){
-                    let nextEntertainment = randomEntertainment;
-                    let answeredNextEntertainment = prompt("What about going to " + nextEntertainment + "?", "must enter 'Yes' or 'No'");
+                    let nextEntertainment = randomEntertainment();
+                    let answeredNextEntertainment = prompt("What about going to " + nextEntertainment + "?", "Must enter 'Yes' or 'No'");
                     if(answeredNextEntertainment === "Yes") {
                         newEntertainment = nextEntertainment; 
                         changeEntertainment = "No"; 
@@ -116,17 +114,42 @@ function myDayTripGenerator (){
             return newEntertainment;
         }
 
+        //Create a function to store all the choices made about the trip by the user
+
         function theChosenTrip(){
-            let chosenDestination = chooseYourDestination();
-            let chosenRestaurant = chooseYourRestaurant();
-            let chosenTransportation = chooseYourTransportation();
-            let chosenEntertainment = chooseYourEntertainment();
+            let chosenDestination;
+            let chosenRestaurant;
+            let chosenTransportation;
+            let chosenEntertainment;
+            
+            let finishedDecisions = "No";
+            let questioningDecions = "No";
 
-            console.log("Your not so randomly generated day trip consists of going by " + chosenTransportation + " to " + chosenDestination + ", eating at a " + chosenRestaurant + " restaurant, and your entertainment being " + chosenEntertainment + "!");
+                if(finishedDecisions === "No"){
+                    while(questioningDecions === "No"){
+                        chosenDestination = chooseYourDestination();
+                        chosenRestaurant = chooseYourRestaurant();
+                        chosenTransportation = chooseYourTransportation();
+                        chosenEntertainment = chooseYourEntertainment();
+
+                        alert("Your not so randomly generated day trip consists of going by " + chosenTransportation + " to " + chosenDestination + ", eating at a " + chosenRestaurant + " restaurant, and your entertainment being " + chosenEntertainment + "!");
+                        questioningDecions = prompt("Do you like your new trip?", "Must enter 'Yes' or 'No'.");
+                    }
+                    console.log("Your not so randomly generated day trip consists of going by " + chosenTransportation + " to " + chosenDestination + ", eating at a " + chosenRestaurant + " restaurant, and your entertainment being " + chosenEntertainment + "!");
+                } 
+                
+         
         }
+        
+        //Begin calling aspects of the function the need to run
 
-        let initialTrip = initialRandomTrip;
-        console.log(initialTrip);
+        let initialDestination = randomDestination();
+        let initialRestaurant = randomRestaurantType();
+        let initialTransport = randomTransportation();
+        let initialEntertainment = randomEntertainment();
+
+        alert("Your randomly generated day trip consists of going by " + initialTransport + " to " + initialDestination + ", eating at a " + initialRestaurant + " restaurant, and your entertainment being " + initialEntertainment + "!");
+
 
         let confirmTrip = prompt("Do you like your generated Day Trip?", "Must enter 'Yes' or 'No'" );
     
@@ -136,14 +159,13 @@ function myDayTripGenerator (){
         
         if (confirmTrip === "Yes") {
             tripImpression = "Yes";
-            console.log("Remember: " + initialTrip);
+            console.log("Your randomly generated day trip consists of going by " + initialTransport + " to " + initialDestination + ", eating at a " + initialRestaurant + " restaurant, and your entertainment being " + initialEntertainment + "!");
         } else {
-            letfinalizedTrip = theChosenTrip;
-            tripImpression = "No"; 
+            let finalizedTrip = theChosenTrip(); 
+            tripImpression = "Yes";
         }
         
     }
 }
 
-let myPlans = myDayTripGenerator(); 
-console.log(myPlans);
+let myPlans = myDayTripGenerator();
